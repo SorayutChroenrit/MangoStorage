@@ -5,5 +5,5 @@ import react from "@vitejs/plugin-react";
 export default defineConfig({
   base: "/Project/",
   plugins: [react()],
-  base: "/Project/",
+  base: "/MangoStorage/",
 });
