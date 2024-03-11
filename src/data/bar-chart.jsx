@@ -2,13 +2,13 @@ import { BarChart } from "@mui/x-charts/BarChart";
 
 const uData = [10, 20, 30, 40, 50, 60, 70];
 const xLabels = [
-  "Page A",
-  "Page B",
-  "Page C",
-  "Page D",
-  "Page E",
-  "Page F",
-  "Page G",
+  "Jan 28",
+  "Feb 4",
+  "Feb 11",
+  "Feb 18",
+  "Feb 25",
+  "Mar 3",
+  "Mar 10",
 ];
 
 export default function SimpleBarChart() {
