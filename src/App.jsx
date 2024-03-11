@@ -17,6 +17,7 @@ function App() {
       <HashRouter>
         <Routes>
           <Route path="/" element={<Layout />}>
+            <Route path="/" element={<Navigate to="/dashboard" />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/order" element={<Order />} />
             <Route path="/products" element={<Products />} />
