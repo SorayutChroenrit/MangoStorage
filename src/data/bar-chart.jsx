@@ -1,62 +1,25 @@
-import  { useEffect, useRef } from 'react';
-import Chart from 'chart.js/auto';
+import { BarChart } from "@mui/x-charts/BarChart";
 
-const BarChart = () => {
-  const chartRef = useRef(null);
+const uData = [10, 20, 30, 40, 50, 60, 70];
+const xLabels = [
+  "Page A",
+  "Page B",
+  "Page C",
+  "Page D",
+  "Page E",
+  "Page F",
+  "Page G",
+];
 
-  useEffect(() => {
-    const ctx = chartRef.current.getContext('2d');
-    const myChart = new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: ["January", "February", "March", "April", "May", "June"],
-        datasets: [{
-          label: "Revenue",
-          backgroundColor: "rgba(2,117,216,1)",
-          borderColor: "rgba(2,117,216,1)",
-          data: [4215, 5312, 6251, 7841, 9821, 14984],
-        }],
-      },
-      options: {
-        scales: {
-          x: [{
-            time: {
-              unit: 'month'
-            },
-            gridLines: {
-              display: false
-            },
-            ticks: {
-              maxTicksLimit: 6
-            }
-          }],
-          y: [{
-            ticks: {
-              min: 0,
-              max: 15000,
-              maxTicksLimit: 5
-            },
-            gridLines: {
-              display: true
-            }
-          }],
-        },
-        legend: {
-          display: false
-        }
-      }
-    });
-
-    return () => {
-      myChart.destroy();
-    };
-  }, []);
-
+export default function SimpleBarChart() {
   return (
-    <div>
-      <canvas ref={chartRef}></canvas>
-    </div>
+    <BarChart
+      width={800}
+      height={400}
+      series={[
+        { data: uData, label: "Completed", id: "uvId", color: "#73C088" },
+      ]}
+      xAxis={[{ data: xLabels, scaleType: "band" }]}
+    />
   );
-};
-
-export default BarChart;
+}

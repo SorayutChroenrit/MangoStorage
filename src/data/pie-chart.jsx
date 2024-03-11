@@ -1,48 +1,52 @@
-import  { useEffect, useRef } from 'react';
-import Chart from 'chart.js/auto'; // Import the entire Chart.js library
+import { useEffect, useState } from "react";
+import { PieChart } from "@mui/x-charts/PieChart";
 
-const PieChart = () => {
-  const chartContainer = useRef(null); // Reference to the chart canvas element
-  const myPieChart = useRef(null); // Ref to hold the chart instance
+const SimplePieChart = () => {
+  const [chartData, setChartData] = useState([]);
 
   useEffect(() => {
-    if (chartContainer.current) {
-      const ctx = chartContainer.current.getContext('2d');
-      myPieChart.current = new Chart(ctx, {
-        type: 'pie',
-        data: {
-          labels: ["iPhone", "MacBook", "AirPods", "Apple Watch", "Mac studio"],
-          datasets: [{
-            data: [54.73, 13.52, 11.05 , 10.54, 10.14],
-            backgroundColor: ['#007bff', '#dc3545', '#ffc107', '#28a745','#e6547f'],
-          }],
-        },
-        options: {
-          plugins: {
-            legend: {
-              display: true,
-              position: 'top',
-            },
-            title: {
-              display: true,
-              text: 'Sales Distribution',
-            },
-          },
-          
-        },
-      });
-    }
+    // Fetch data from API
+    fetch("http://localhost:3001/Product")
+      .then((response) => response.json())
+      .then((data) => {
+        // Process the fetched data
+        const colors = [
+          "#FF6384", // Red
+          "#36A2EB", // Blue
+          "#FFCE56", // Yellow
+          "#4BC0C0", // Teal
+          "#9966FF", // Purple
+          "#FF9F40", // Orange
+          "#32CD32", // Lime Green
+          "#FFD700", // Gold
+          "#808080", // Gray
+          "#00FFFF", // Cyan
+          // Add more colors as needed
+        ];
+        const processedData = data.map((item, index) => ({
+          id: item.P_ID,
+          value: item.Quantity,
+          label: item.P_Name,
+          color: colors[index % colors.length], // Assign color based on position
+        }));
+        // Set the processed data to state
+        setChartData(processedData);
+      })
+      .catch((error) => console.error("Error fetching data:", error));
+  }, []); // Empty dependency array to run the effect only once
 
-    // Cleanup function
-    return () => {
-      // Destroy the chart instance when the component unmounts
-      if (myPieChart.current) {
-        myPieChart.current.destroy();
-      }
-    };
-  }, []);
-
-  return <canvas ref={chartContainer} />;
+  return (
+    <PieChart
+      series={[
+        {
+          data: chartData,
+          highlightScope: { faded: "global", highlighted: "item" },
+          faded: { innerRadius: 30, additionalRadius: -30, color: "gray" },
+        },
+      ]}
+      height={400}
+    />
+  );
 };
 
-export default PieChart;
+export default SimplePieChart;

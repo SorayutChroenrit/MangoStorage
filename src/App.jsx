@@ -2,8 +2,7 @@ import { Layout } from "./components/Layout";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.min.css";
 import "./App.css";
-import { HashRouter, Route, Routes } from "react-router-dom";
-
+import { HashRouter, Route, Routes, Navigate } from "react-router-dom";
 import { Warehouse } from "./pages/Warehouse";
 import { Dashboard } from "./pages/Dashboard";
 import { Employee } from "./pages/Employee";

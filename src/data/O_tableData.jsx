@@ -37,8 +37,11 @@ function O_TableData() {
   const [selectedItem, setSelectedItem] = useState(null);
   const [OrderID, setOrderID] = useState("");
   const [Quantity, setQuantity] = useState(0);
+  // eslint-disable-next-line no-unused-vars
   const [OrderDate, setOrderDate] = useState("");
+  // eslint-disable-next-line no-unused-vars
   const [UserID, setUserID] = useState("");
+  // eslint-disable-next-line no-unused-vars
   const [Total_Number, setTotalNumber] = useState("");
   const [Status, setStatus] = useState("");
   const [Owner, setOwner] = useState("");
@@ -91,6 +94,7 @@ function O_TableData() {
     [`&.${tableCellClasses.head}`]: {
       backgroundColor: theme.palette.common.black,
       color: theme.palette.common.white,
+      fontSize: 16,
     },
     [`&.${tableCellClasses.body}`]: {
       fontSize: 16,

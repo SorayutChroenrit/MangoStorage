@@ -82,6 +82,7 @@ function P_TableData() {
     [`&.${tableCellClasses.head}`]: {
       backgroundColor: theme.palette.common.black,
       color: theme.palette.common.white,
+      fontSize: 16,
     },
     [`&.${tableCellClasses.body}`]: {
       fontSize: 16,

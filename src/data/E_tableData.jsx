@@ -70,9 +70,10 @@ function TableData() {
     [`&.${tableCellClasses.head}`]: {
       backgroundColor: theme.palette.common.black,
       color: theme.palette.common.white,
+      fontSize: "16px !important",
     },
     [`&.${tableCellClasses.body}`]: {
-      fontSize: 16,
+      fontSize: "16px !important",
     },
   }));
 

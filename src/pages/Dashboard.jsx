@@ -1,5 +1,5 @@
-import AreaChart from "../data/area-chart";
-import BarChart from "../data/bar-chart";
+import SimpleBarChart from "../data/bar-chart";
+import SimplePieChart from "../data/pie-chart";
 import { Link } from "react-router-dom";
 export const Dashboard = () => {
   return (
@@ -41,7 +41,7 @@ export const Dashboard = () => {
               <div className="card-body d-flex flex-row align-items-center flex-0 border-bottom">
                 <div className="d-block">
                   <div className="h6 fw-normal text-gray mb-2">Total Order</div>
-                  <h2 className="h3">14,431,240฿</h2>
+                  <h2 className="h3">300</h2>
                 </div>
               </div>
             </div>
@@ -51,12 +51,15 @@ export const Dashboard = () => {
             >
               <div className="card-body d-flex flex-row align-items-center flex-0 border-bottom">
                 <div className="d-block">
-                  <div className="h6 fw-normal text-gray mb-2">Cost</div>
-                  <h2 className="h3">23,292,450฿</h2>
-                  <div className="small mt-2">
-                    <span className="fas fa-angle-up text-success"></span>
-                    <span className="text-success fw-bold">$100%</span>
+                  <div
+                    className="h6 fw-normal text-gray mb-2"
+                    style={{ color: "green" }}
+                  >
+                    Completed Order
                   </div>
+                  <h2 className="h3" style={{ color: "green" }}>
+                    2
+                  </h2>
                 </div>
               </div>
             </div>
@@ -66,12 +69,15 @@ export const Dashboard = () => {
             >
               <div className="card-body d-flex flex-row align-items-center flex-0 border-bottom">
                 <div className="d-block">
-                  <div className="h6 fw-normal text-gray mb-2">Growth</div>
-                  <h2 className="h3">$100%</h2>
-                  <div className="small mt-2">
-                    <span className="fas fa-angle-up text-success"></span>
-                    <span className="text-success fw-bold">$100%</span>
+                  <div
+                    className="h6 fw-normal text-gray mb-2"
+                    style={{ color: "orange" }}
+                  >
+                    Waiting Order
                   </div>
+                  <h3 className="h3" style={{ color: "orange" }}>
+                    1
+                  </h3>
                 </div>
               </div>
             </div>
@@ -81,10 +87,10 @@ export const Dashboard = () => {
               <div className="card mb-4">
                 <div className="card-header">
                   <i className="fas fa-chart-area me-1"></i>
-                  Area Chart Example
+                  Order
                 </div>
                 <div className="card-body">
-                  <AreaChart />
+                  <SimpleBarChart />
                 </div>
               </div>
             </div>
@@ -92,10 +98,10 @@ export const Dashboard = () => {
               <div className="card mb-4">
                 <div className="card-header">
                   <i className="fas fa-chart-bar me-1"></i>
-                  Bar Chart Example
+                  Inventory
                 </div>
                 <div className="card-body">
-                  <BarChart />
+                  <SimplePieChart />
                 </div>
               </div>
             </div>
