@@ -58,7 +58,7 @@ export const Dashboard = () => {
                     Completed Order
                   </div>
                   <h2 className="h3" style={{ color: "green" }}>
-                    2
+                    1
                   </h2>
                 </div>
               </div>

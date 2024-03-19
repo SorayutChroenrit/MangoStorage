@@ -11802,7 +11802,10 @@ body {
       box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
       z-index: 1;
   }
-
+  .theme-primary .bg-warning-light {
+    background-color: #fff1d9 !important;
+    color: #fbc66c;
+}
   .dropdown-content a {
       color: black;
       padding: 12px 16px;
@@ -11840,4 +11843,5 @@ body {
     margin-bottom: 10px;
     display: inline-block; /* Adjust display property as needed */
   }
+
 

@@ -80,8 +80,8 @@ function P_TableData() {
   }, [data]);
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
-      backgroundColor: theme.palette.common.black,
-      color: theme.palette.common.white,
+      backgroundColor: theme.palette.common.white,
+      color: theme.palette.common.black,
       fontSize: 16,
     },
     [`&.${tableCellClasses.body}`]: {
@@ -96,6 +96,12 @@ function P_TableData() {
     // hide last border
     "&:last-child td, &:last-child th": {
       border: 0,
+    },
+  }));
+  const StyledTableSortLabel = styled(TableSortLabel)(({ theme }) => ({
+    // Styling for the sort icon
+    "& .MuiTableSortLabel-icon": {
+      color: theme.palette.common.white, // Set the color to white
     },
   }));
   const handleSort = (columnId) => {
@@ -343,40 +349,40 @@ function P_TableData() {
           <TableHead>
             <TableRow>
               <StyledTableCell>
-                <TableSortLabel
+                <StyledTableSortLabel
                   active={orderBy === "P_ID"}
                   direction={orderBy === "P_ID" ? order : "asc"}
                   onClick={() => handleSort("P_ID")}
                 >
                   Product ID
-                </TableSortLabel>
+                </StyledTableSortLabel>
               </StyledTableCell>
               <StyledTableCell>
-                <TableSortLabel
+                <StyledTableSortLabel
                   active={orderBy === "P_Name"}
                   direction={orderBy === "P_Name" ? order : "asc"}
                   onClick={() => handleSort("P_Name")}
                 >
                   Product Name
-                </TableSortLabel>
+                </StyledTableSortLabel>
               </StyledTableCell>
               <StyledTableCell>
-                <TableSortLabel
+                <StyledTableSortLabel
                   active={orderBy === "Quantity"}
                   direction={orderBy === "Quantity" ? order : "asc"}
                   onClick={() => handleSort("Quantity")}
                 >
                   Quantity
-                </TableSortLabel>
+                </StyledTableSortLabel>
               </StyledTableCell>
               <StyledTableCell>
-                <TableSortLabel
+                <StyledTableSortLabel
                   active={orderBy === "LastUpdated"}
                   direction={orderBy === "LastUpdated" ? order : "asc"}
                   onClick={() => handleSort("LastUpdated")}
                 >
                   Last Updated
-                </TableSortLabel>
+                </StyledTableSortLabel>
               </StyledTableCell>
               <StyledTableCell>Actions</StyledTableCell>
             </TableRow>

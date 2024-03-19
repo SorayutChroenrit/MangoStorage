@@ -44,7 +44,8 @@ const SimplePieChart = () => {
           faded: { innerRadius: 30, additionalRadius: -30, color: "gray" },
         },
       ]}
-      height={400}
+      height={300}
+      labelAccessor={(d) => `${d.label}: ${d.value}`}
     />
   );
 };

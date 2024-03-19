@@ -14,8 +14,8 @@ const xLabels = [
 export default function SimpleBarChart() {
   return (
     <BarChart
-      width={800}
-      height={400}
+      width={600}
+      height={300}
       series={[
         { data: uData, label: "Completed", id: "uvId", color: "#73C088" },
       ]}
