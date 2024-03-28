@@ -25,7 +25,19 @@ export async function fetchProductData() {
     throw new Error(error.message);
   }
 }
-
+// Define the function to fetch Product data
+export async function fetchSerialNumberData() {
+  try {
+    const response = await fetch("http://localhost:3001/SerialNumber");
+    if (!response.ok) {
+      throw new Error("Failed to fetch SerialNumber data");
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+}
 // Define the function to fetch Order data
 export async function fetchOrderData() {
   try {

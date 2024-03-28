@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Outlet } from "react-router-dom";
+
 export const Navbar = () => {
   const [CurBtn, setCurBtn] = useState("");
   const dashboardRef = useRef();
@@ -14,10 +15,7 @@ export const Navbar = () => {
   }, []);
   return (
     <div id="layoutSidenav">
-      <div
-        id="layoutSidenav_nav"
-        style={{ width: "225px", height: "100vh", zIndex: "1038" }}
-      >
+      <div id="layoutSidenav_nav" style={{ width: "225px", zIndex: "1038" }}>
         <nav
           className="sb-sidenav accordion sb-sidenav-dark"
           id="sidenavAccordion"
@@ -25,7 +23,6 @@ export const Navbar = () => {
           <div className="sb-sidenav-menu">
             <div className="nav">
               <div className="sb-sidenav-menu-heading">Menu</div>
-
               <Link to={"/dashboard"}>
                 <div
                   className={
@@ -39,7 +36,7 @@ export const Navbar = () => {
                   }}
                 >
                   <div className="sb-nav-link-icon">
-                    <i className="bi bi-clipboard2-data-fill"></i>
+                    <i className="bi bi-clipboard2-data-fill icon"></i>
                   </div>
                   Dashboard
                 </div>
@@ -56,7 +53,7 @@ export const Navbar = () => {
                   }}
                 >
                   <div className="sb-nav-link-icon">
-                    <i className="bi bi-list-ul"></i>
+                    <i className="bi bi-list-ul icon"></i>
                   </div>
                   Order
                 </div>
@@ -75,7 +72,7 @@ export const Navbar = () => {
                   }}
                 >
                   <div className="sb-nav-link-icon">
-                    <i className="bi bi-box-seam-fill"></i>
+                    <i className="bi bi-box-seam-fill icon"></i>
                   </div>
                   Products<div className="sb-sidenav-collapse-arrow"></div>
                 </div>
@@ -93,7 +90,7 @@ export const Navbar = () => {
                   }}
                 >
                   <div className="sb-nav-link-icon">
-                    <i className="bi bi-boxes"></i>
+                    <i className="bi bi-graph-up icon"></i>
                   </div>
                   Stock in<div className="sb-sidenav-collapse-arrow"></div>
                 </div>
@@ -111,7 +108,7 @@ export const Navbar = () => {
                   }}
                 >
                   <div className="sb-nav-link-icon">
-                    <i className="bi bi-graph-up"></i>
+                    <i className="bi bi-boxes icon"></i>
                   </div>
                   Warehouse
                 </div>
@@ -129,7 +126,7 @@ export const Navbar = () => {
                   }}
                 >
                   <div className="sb-nav-link-icon">
-                    <i className="bi bi-person-fill"></i>
+                    <i className="bi bi-person-fill icon"></i>
                   </div>
                   UserAccount
                 </div>

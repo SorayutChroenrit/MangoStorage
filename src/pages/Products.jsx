@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-
 import P_TableData from "../data/P_tableData";
 export const Products = () => {
   return (

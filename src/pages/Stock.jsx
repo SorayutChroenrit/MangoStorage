@@ -1,10 +1,11 @@
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
+import S_TableData from "../data/S_table";
 export const Stock = () => {
-    return (
-        <div id="layoutSidenav_content">
+  return (
+    <div id="layoutSidenav_content">
       <main>
         <div className="container-fluid px-4">
-          <h1 className="mt-4">Stock in</h1>
+          <h1 className="mt-4">Stock</h1>
           <ol
             className="breadcrumb mb-4"
             style={{
@@ -14,20 +15,16 @@ export const Stock = () => {
             }}
           >
             <li className="breadcrumb-item">
-            <Link to={"/dashboard"}>
-              Dashboard
-              </Link>
+              <Link to={"/dashboard"}>Dashboard</Link>
             </li>
-            <li className="breadcrumb-item active">Stock in</li>
+            <li className="breadcrumb-item active">Stock</li>
           </ol>
           <div className="card mb-4">
-            <div className="card-header">
-              <i className="fas fa-table me-1"></i>
-              Stock
-            </div>
+            <br />
+            <S_TableData />
           </div>
         </div>
       </main>
     </div>
-    )
-}
+  );
+};

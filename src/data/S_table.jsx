@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { fetchProductData } from "./API";
+import { fetchSerialNumberData } from "./API";
 import { styled } from "@mui/material/styles";
 import { tableCellClasses } from "@mui/material/TableCell";
 import {
@@ -29,8 +30,9 @@ import DeleteIcon from "@mui/icons-material/DeleteOutlined";
 import MButton from "@mui/material/Button";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import "bootstrap/dist/css/bootstrap.min.css";
-function P_TableData() {
+function S_TableData() {
   const [data, setData] = useState([]);
+  const [allPIDs, setAllPIDs] = useState([]);
   const [error, setError] = useState(null);
   const [orderBy, setOrderBy] = useState("");
   const [order, setOrder] = useState("asc");
@@ -53,12 +55,13 @@ function P_TableData() {
     Owner: "",
     Shelf: "",
   });
-
   useEffect(() => {
     const fetchData = async () => {
       try {
         const ProductsData = await fetchProductData();
         setData(ProductsData);
+        const allPIDs = ProductsData.map((item) => item.P_ID);
+        setAllPIDs(allPIDs); // Set allPIDs state with array of P_IDs
       } catch (error) {
         setError(error.message);
       }
@@ -67,6 +70,37 @@ function P_TableData() {
     // Fetch data initially
     fetchData();
   }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const SerialNumberData = await fetchSerialNumberData(); // Assuming fetchSerialNumberData() fetches data from somewhere
+        const formattedData = SerialNumberData.map((item) => ({
+          ...item,
+          LastUpdated: formatDate(item.LastUpdated), // Formatting LastUpdated timestamp
+        }));
+        setData(formattedData);
+      } catch (error) {
+        setError(error.message);
+      }
+    };
+
+    // Fetch data initially
+    fetchData();
+  }, []);
+
+  const formatDate = (timestamp) => {
+    const date = new Date(timestamp);
+    const hours = date.getHours().toString().padStart(2, "0");
+    const minutes = date.getMinutes().toString().padStart(2, "0");
+    const seconds = date.getSeconds().toString().padStart(2, "0");
+    const time = `${hours}:${minutes}:${seconds}`;
+    const day = date.getDate().toString().padStart(2, "0");
+    const month = (date.getMonth() + 1).toString().padStart(2, "0");
+    const year = date.getFullYear();
+    return `${time} ${day}/${month}/${year}`;
+  };
+
   // Function to handle file upload
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
@@ -149,7 +183,9 @@ function P_TableData() {
   const handleChangeShelf = (event) => {
     setShelf(event.target.value);
   };
-
+  const handleChangeP_ID = (event) => {
+    setP_ID(event.target.value);
+  };
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -342,8 +378,19 @@ function P_TableData() {
       >
         <h2 style={{ paddingLeft: "1rem" }}>Product Lists</h2>
         <Button variant="primary" onClick={handleShow}>
-          Create Product
+          Add Product
         </Button>
+        <div>
+          <input
+            type="search"
+            placeholder="search..."
+            style={{
+              border: "1px solid black",
+              borderRadius: "4px",
+              textAlign: "center",
+            }}
+          />
+        </div>
       </div>
       <TableContainer component={Paper}>
         <Table
@@ -373,6 +420,24 @@ function P_TableData() {
               </StyledTableCell>
               <StyledTableCell>
                 <StyledTableSortLabel
+                  active={orderBy === "S_ID"}
+                  direction={orderBy === "S_ID" ? order : "asc"}
+                  onClick={() => handleSort("S_ID")}
+                >
+                  Serial Number
+                </StyledTableSortLabel>
+              </StyledTableCell>
+              <StyledTableCell>
+                <StyledTableSortLabel
+                  active={orderBy === "P_Name"}
+                  direction={orderBy === "P_Name" ? order : "asc"}
+                  onClick={() => handleSort("P_Name")}
+                >
+                  Storage ID
+                </StyledTableSortLabel>
+              </StyledTableCell>
+              <StyledTableCell>
+                <StyledTableSortLabel
                   active={orderBy === "Quantity"}
                   direction={orderBy === "Quantity" ? order : "asc"}
                   onClick={() => handleSort("Quantity")}
@@ -398,7 +463,9 @@ function P_TableData() {
                     />
                     {item.P_Name}
                   </StyledTableCell>
-                  <StyledTableCell>{item.Quantity}</StyledTableCell>
+                  <StyledTableCell>{item.Serial_No}</StyledTableCell>
+                  <StyledTableCell>{item.S_ID}</StyledTableCell>
+                  <StyledTableCell>{item.LastUpdated}</StyledTableCell>
                   <StyledTableCell>
                     <IconButton
                       aria-label="edit"
@@ -432,7 +499,7 @@ function P_TableData() {
       {/* Modal Create Product */}
       <Modal show={show} onHide={handleClose} size="lg">
         <Modal.Header closeButton>
-          <Modal.Title>Create Product</Modal.Title>
+          <Modal.Title>Add Product</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <form id="myForm">
@@ -498,21 +565,29 @@ function P_TableData() {
                 </MButton>
               </div>
             </div>
-            <div className="row mb-3">
-              <div className="col-md-2">
-                <TextField
-                  id="P_ID"
-                  label="Product ID"
-                  variant="outlined"
-                  fullWidth
-                  required
-                  readOnly
-                  value={P_ID}
-                  name="P_ID"
-                  type="text"
-                />
+            <div className="row mb-3 d-flex justify-content-center">
+              <div className="col-md-3">
+                <FormControl sx={{ m: 1, minWidth: 120 }}>
+                  <InputLabel id="demo-simple-select-helper-label">
+                    ProductID
+                  </InputLabel>
+                  <Select
+                    id="P_ID"
+                    label="Product ID"
+                    name="P_ID"
+                    value={P_ID}
+                    onChange={handleChangeP_ID}
+                  >
+                    {/* Populate the dropdown with allPIDs */}
+                    {allPIDs.map((pid) => (
+                      <MenuItem key={pid} value={pid}>
+                        {pid}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
               </div>
-              <div className="col-md-5">
+              <div className="col-md-4">
                 <TextField
                   id="P_Name"
                   label="Product Name"
@@ -809,4 +884,4 @@ function P_TableData() {
   );
 }
 
-export default P_TableData;
+export default S_TableData;

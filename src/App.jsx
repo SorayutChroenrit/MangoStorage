@@ -9,14 +9,18 @@ import { Employee } from "./pages/Employee";
 import { Order } from "./pages/Order";
 import { Products } from "./pages/Products";
 import { Stock } from "./pages/Stock";
+import SignUp from "./pages/Signup";
+import Login from "./pages/Login";
 
 function App() {
   return (
     <div>
       <HashRouter>
         <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/" element={<Navigate to="/login" />} />
           <Route path="/" element={<Layout />}>
-            <Route path="/" element={<Navigate to="/dashboard" />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/order" element={<Order />} />
             <Route path="/products" element={<Products />} />

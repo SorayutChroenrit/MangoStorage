@@ -35,12 +35,6 @@ function TableData() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [selectedItem, setSelectedItem] = useState(null);
-  // eslint-disable-next-line no-unused-vars
-  const [newusername, setNewUserName] = useState("");
-  // eslint-disable-next-line no-unused-vars
-  const [newpassword, setNewPassWord] = useState("");
-  // eslint-disable-next-line no-unused-vars
-  const [newposition, setNewPosition] = useState("");
   const [username, setUserName] = useState("");
   const [password, setPassWord] = useState("");
   const [position, setPosition] = useState("");
@@ -299,7 +293,7 @@ function TableData() {
     }).then((result) => {
       if (result.isConfirmed) {
         // If user confirms deletion, send delete request
-        Axios.delete(`http://localhost:3001/delete/${id}`)
+        Axios.delete(`http://localhost:3001/deleteUser/${id}`)
           .then((response) => {
             console.log(response); // Log the response
             setData((prevData) => prevData.filter((val) => val.id !== id));
